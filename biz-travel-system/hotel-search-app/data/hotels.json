@@ -1,0 +1,21 @@
+[ {
+  "name" : "Central Station Inn",
+  "city" : "東京",
+  "pricePerNight" : 12000,
+  "features" : "駅に近い, 朝食付き"
+}, {
+  "name" : "Bay View Hotel",
+  "city" : "横浜",
+  "pricePerNight" : 9500,
+  "features" : "海沿い, 駅に近い"
+}, {
+  "name" : "Mountain Lodge",
+  "city" : "長野",
+  "pricePerNight" : 8000,
+  "features" : "自然, 温泉"
+}, {
+  "name" : "City Comfort",
+  "city" : "大阪",
+  "pricePerNight" : 11000,
+  "features" : "駅に近い, ビジネス向け"
+} ]

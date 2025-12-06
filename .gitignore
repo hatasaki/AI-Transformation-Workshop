@@ -1,0 +1,10 @@
+# Ignore Java targets
+biz-travel-system/hotel-search-app/target/
+biz-travel-system/travel-request-app/target/
+biz-travel-system/travel-request-app/data
+
+# Python virtual environment
+travel-agent-app/.venv
+
+# Ignore environment variables file
+travel-agent-app/.env

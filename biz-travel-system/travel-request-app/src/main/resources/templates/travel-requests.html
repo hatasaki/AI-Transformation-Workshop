@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>出張申請</title>
+    <style>
+        body { font-family: "Noto Sans JP", sans-serif; margin: 24px; background: #f5f6fa; }
+        h1 { margin-bottom: 8px; }
+        .container { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+        .card { background: #fff; padding: 16px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { border-bottom: 1px solid #e4e7ed; padding: 8px; text-align: left; }
+        th { background: #eef1f6; }
+        label { display: block; margin-top: 12px; font-weight: bold; }
+        input, textarea { width: 100%; padding: 8px; margin-top: 4px; border: 1px solid #cdd4e0; border-radius: 4px; }
+        button { margin-top: 12px; padding: 10px 16px; background: #2f7cf6; border: none; color: #fff; border-radius: 6px; cursor: pointer; }
+        button:disabled { background: #9fb8ef; cursor: not-allowed; }
+        .error { color: #d9534f; margin-top: 8px; }
+    </style>
+</head>
+<body>
+<h1>出張申請</h1>
+<p>既存の出張申請一覧と、新規申請フォームです。送信はバックエンドのREST API経由で処理されます。</p>
+<div class="container">
+    <section class="card">
+        <h2>出張一覧</h2>
+        <table aria-label="出張一覧">
+            <thead>
+            <tr><th>出張名</th><th>期間</th><th>場所</th><th>費用概算</th></tr>
+            </thead>
+            <tbody id="travel-list">
+            <tr><td colspan="4">読み込み中...</td></tr>
+            </tbody>
+        </table>
+    </section>
+    <section class="card">
+        <h2>新規出張申請</h2>
+        <form id="travel-form">
+            <label>出張名<input name="title" required></label>
+            <label>開始日<input type="date" name="startDate" required></label>
+            <label>終了日<input type="date" name="endDate" required></label>
+            <label>出張目的<textarea name="purpose" rows="3" required></textarea></label>
+            <label>出張場所（City名）<input name="city" required></label>
+            <label>出張費用概算（数値）<input type="number" step="0.01" name="estimatedCost" required></label>
+            <button type="submit">申請を送信</button>
+            <div id="error" class="error" role="alert"></div>
+        </form>
+    </section>
+</div>
+<script>
+    const listBody = document.getElementById('travel-list');
+    const form = document.getElementById('travel-form');
+    const errorBox = document.getElementById('error');
+
+    async function loadRequests() {
+        listBody.innerHTML = '<tr><td colspan="4">読み込み中...</td></tr>';
+        try {
+            const res = await fetch('/api/travel-requests');
+            const data = await res.json();
+            if (!Array.isArray(data) || data.length === 0) {
+                listBody.innerHTML = '<tr><td colspan="4">まだ申請がありません</td></tr>';
+                return;
+            }
+            listBody.innerHTML = data.map(item => {
+                const period = `${item.startDate} 〜 ${item.endDate}`;
+                const cost = item.estimatedCost ? `¥${Number(item.estimatedCost).toLocaleString()}` : '-';
+                return `<tr><td>${item.title}</td><td>${period}</td><td>${item.city}</td><td>${cost}</td></tr>`;
+            }).join('');
+        } catch (e) {
+            listBody.innerHTML = '<tr><td colspan="4">読み込みに失敗しました</td></tr>';
+        }
+    }
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        errorBox.textContent = '';
+        const formData = new FormData(form);
+        const payload = Object.fromEntries(formData.entries());
+        try {
+            const res = await fetch('/api/travel-requests', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+            if (!res.ok) {
+                const msg = await res.text();
+                throw new Error(msg || '送信に失敗しました');
+            }
+            form.reset();
+            await loadRequests();
+        } catch (err) {
+            errorBox.textContent = err.message;
+        }
+    });
+
+    loadRequests();
+</script>
+</body>
+</html>

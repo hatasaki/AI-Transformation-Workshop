@@ -1,0 +1,25 @@
+### Get All Travel Requests
+GET http://localhost:8080/api/travel-requests
+
+### Create a New Travel Request
+POST http://localhost:8080/api/travel-requests
+Content-Type: application/json  
+
+{
+    "title": "出張A",
+    "startDate": "2025-01-10",
+    "endDate": "2025-01-12",
+    "purpose": "顧客訪問",
+    "city": "Tokyo",
+    "estimatedCost": 120000
+}
+
+### search hotel by city
+POST http://localhost:8080/api/hotels/search
+Content-Type: application/json
+
+{
+    "city": "東京",
+    "maxPrice": 15000,
+    "feature": ""
+}
