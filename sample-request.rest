@@ -15,7 +15,7 @@ Content-Type: application/json
 }
 
 ### search hotel by city
-POST http://localhost:8080/api/hotels/search
+POST https://hotel-search-app-ai-ws.apps.keisuke.australiaeast.aroapp.io/api/hotels/search
 Content-Type: application/json
 
 {

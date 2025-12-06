@@ -14,6 +14,11 @@
   "pricePerNight" : 8000,
   "features" : "自然, 温泉"
 }, {
+  "name" : "Castle Stay",
+  "city" : "名古屋",
+  "pricePerNight" : 10000,
+  "features" : "駅に近い, 朝食付き"
+}, {
   "name" : "City Comfort",
   "city" : "大阪",
   "pricePerNight" : 11000,
