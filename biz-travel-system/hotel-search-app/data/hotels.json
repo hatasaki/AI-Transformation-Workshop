@@ -21,6 +21,11 @@
 }, {
   "name" : "City Comfort",
   "city" : "大阪",
+  "pricePerNight" : 10000,
+  "features" : "朝食付き"
+}, {
+  "name" : "Station Suite",
+  "city" : "大阪",
   "pricePerNight" : 11000,
   "features" : "駅に近い, ビジネス向け"
-} ]
+}]

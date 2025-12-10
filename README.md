@@ -8,7 +8,7 @@
 - 既存 Java アプリ 2: ホテル検索アプリ (`biz-travel-system/hotel-search-app`)
 - AI エージェントアプリ: Microsoft Agent Framework を用いて Microsoft Foundry（旧 Azure AI Foundry）の生成 AI モデルを呼び出す Python アプリ (`travel-agent-app`)
 
-参加者は、上記 3 アプリケーションをローカル環境で実行し、出張申請フローの中で AI エージェントを活用できる一連のシナリオを体験します。
+参加者は、上記 3 アプリケーションをローカル環境で実行し、出張申請フローの中で AI エージェントを活用できる一連のシナリオを体験します[。](https://livesend.microsoft.com/i/W4kGb0D5wE2PKYUcewYHnpA5B7U2bJzZ3QgmSA2Qs1KcWxi1VI99YJml6fXfrWtbGek2DbuT5GHJi9qUYHn199JOTwXNlRkCMFcMyVMZcxBi___8H6iRIgV2kLHw2UfN9W)
 
 前提条件として、Microsoft Foundry リソースとプロジェクト、および使用する生成 AI モデルのデプロイは完了済みであることを想定します（モデルのデプロイ方法や Foundry プロジェクトの作成方法については、Azure AI Foundry の公式ドキュメントを参照してください）。
 
